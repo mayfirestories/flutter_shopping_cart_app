@@ -115,10 +115,10 @@ class MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LandingPage()),
+                  MaterialPageRoute(builder: (context) => const LandingPage()),
                 );
               },
-              child: Text('Home Page'),
+              child: const Text('Home Page'),
             ),
           ],
         ),
