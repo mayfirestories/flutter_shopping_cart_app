@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_shopping_cart_app/views/checkout_page.dart';
 
+//landing_page.dart
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
 
@@ -90,62 +91,69 @@ class LandingPageState extends State<LandingPage> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 16.0), // Add this line
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.only(left: 16.0),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4, // Set the number of items per row
+            childAspectRatio: 3 /
+                4, // Adjust this value as needed to change the aspect ratio of the items
+          ),
           itemCount: products.length,
           itemBuilder: (context, index) {
             final product = products[index];
-            return Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
+            return SizedBox(
+              width: MediaQuery.of(context).size.width / 4,
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product.title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(product.description),
-                    const SizedBox(height: 8),
-                    Text('\$${product.price.toStringAsFixed(2)}'),
-                    const SizedBox(height: 8),
-                    IconButton(
-                      icon: const Icon(Icons.remove),
-                      onPressed: () {
-                        setState(() {
-                          if (quantities[index] > 0) {
-                            quantities[index]--;
-                          }
-                        });
-                      },
-                    ),
-                    Text('${quantities[index]}'),
-                    IconButton(
-                      icon: const Icon(Icons.add),
-                      onPressed: () {
-                        setState(() {
-                          quantities[index]++;
-                        });
-                      },
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          totalCartItems += quantities[index];
-                          for (int i = 0; i < quantities[index]; i++) {
-                            cartItems.add(product);
-                          }
-                          quantities[index] = 0;
-                        });
-                      },
-                      child: const Text('Add to Cart'),
-                    ),
-                  ],
-                ),
-                const SizedBox(width: 16), // Add space between products
-              ],
+                      Text(product.description),
+                      const SizedBox(height: 8),
+                      Text('\$${product.price.toStringAsFixed(2)}'),
+                      const SizedBox(height: 8),
+                      IconButton(
+                        icon: const Icon(Icons.remove),
+                        onPressed: () {
+                          setState(() {
+                            if (quantities[index] > 0) {
+                              quantities[index]--;
+                            }
+                          });
+                        },
+                      ),
+                      Text('${quantities[index]}'),
+                      IconButton(
+                        icon: const Icon(Icons.add),
+                        onPressed: () {
+                          setState(() {
+                            quantities[index]++;
+                          });
+                        },
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            totalCartItems += quantities[index];
+                            for (int i = 0; i < quantities[index]; i++) {
+                              cartItems.add(product);
+                            }
+                            quantities[index] = 0;
+                          });
+                        },
+                        child: const Text('Add to Cart'),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 16), // Add space between products
+                ],
+              ),
             );
           },
         ),
