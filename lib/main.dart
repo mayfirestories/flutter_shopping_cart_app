@@ -34,14 +34,6 @@ class MyHomePage extends StatefulWidget {
 class MyHomePageState extends State<MyHomePage> {
   List<String> _items = <String>[];
 
-  void _addItem() {
-    setState(() {
-      int index = _items.length;
-      _items.add('Item $index');
-      _saveItems();
-    });
-  }
-
   @override
   void initState() {
     super.initState();
@@ -106,47 +98,12 @@ class MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            Text(widget.title),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LandingPage()),
-                );
-              },
-              child: const Text('Home Page'),
-            ),
-          ],
-        ),
+    return MaterialApp(
+      title: 'Shopping Cart App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16.0),
-        itemCount: _items.length,
-        itemBuilder: (context, i) {
-          return ListTile(
-            leading: IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () {
-                setState(() {
-                  _items.removeAt(i);
-                  _saveItems();
-                });
-              },
-            ),
-            title: Text(_items[i]),
-            onTap: () => _editItem(i),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _addItem,
-        tooltip: 'Add Item',
-        child: const Icon(Icons.add),
-      ),
+      home: const LandingPage(), // Set LandingPage as the home page
     );
   }
 }
