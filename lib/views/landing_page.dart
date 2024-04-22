@@ -95,8 +95,9 @@ class LandingPageState extends State<LandingPage> {
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4, // Set the number of items per row
-            childAspectRatio: 3 /
-                4, // Adjust this value as needed to change the aspect ratio of the items
+            mainAxisSpacing: 1, // Add this line to control the vertical spacing
+            // Adjust the value below as needed to change the aspect ratio of the items
+            childAspectRatio: 1.5,
           ),
           itemCount: products.length,
           itemBuilder: (context, index) {
@@ -151,7 +152,7 @@ class LandingPageState extends State<LandingPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(width: 16), // Add space between products
+                  const SizedBox(width: 4), // Add space between products
                 ],
               ),
             );
